@@ -6,13 +6,13 @@
 /*   By: mmohamma <mmohamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:35:42 by mmohamma          #+#    #+#             */
-/*   Updated: 2022/06/17 14:57:54 by mmohamma         ###   ########.fr       */
+/*   Updated: 2022/06/20 01:10:51 by mmohamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static	int	is_ber_file(char *file) 
+static	int	is_ber_file(char *file)
 {
 	const char	*str = ft_strrchr(file, '.');
 
@@ -30,6 +30,8 @@ static int	is_map_rectangle(t_map *map, char *file)
 	char		*line;
 
 	count = 0;
+	if (fd == -1)
+		return (0);
 	line = get_next_line(fd);
 	map->col = ft_strlen(line);
 	while (line)
@@ -48,17 +50,17 @@ static int	is_map_rectangle(t_map *map, char *file)
 	return (1);
 }
 
-static void	is_pce(char c, t_data *data)
+static void	is_pce(char c, t_map *map)
 {
 	if (c == 'P')
-		data->p++;
+		map->p++;
 	if (c == 'C')
-		data->c++;
+		map->c++;
 	if (c == 'E')
-		data->e++;
+		map->e++;
 }
 
-static int	is_map_closed_pce(t_map *map, t_data *data)
+static int	is_map_closed_pce(t_map *map)
 {
 	char	**str;
 	int		i;
@@ -76,13 +78,13 @@ static int	is_map_closed_pce(t_map *map, t_data *data)
 		{
 			if (str[j][0] != '1' || str[j][map->col - 2] != '1')
 				return (0);
-			is_pce(str[j][i], data);
+			is_pce(str[j][i], map);
 			j++;
 		}
 		j = 1;
 		i++;
 	}
-	if (data->c < 1 || data->p != 1 || data->e < 1)
+	if (map->c < 1 || map->p != 1 || map->e < 1)
 		return (0);
 	return (1);
 }
@@ -95,11 +97,15 @@ void	free_map(t_map *map)
 	matrix = map->pos;
 	i = 0;
 	while (i < map->row)
+	{
+		printf("%p\n", matrix[i]);
 		free(matrix[i++]);
+	}
+	printf("%p\n", matrix);
 	free(matrix);
 }
 
-int	is_map_valid(t_map *map, char *file, t_data *data)
+int	is_map_valid(char *file, t_map *map)
 {
 	int		fd;
 	char	*line;
@@ -119,7 +125,7 @@ int	is_map_valid(t_map *map, char *file, t_data *data)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	if (!is_map_closed_pce(map, data))
+	if (!is_map_closed_pce(map))
 	{
 		free_map(map);
 		return (0);
