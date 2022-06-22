@@ -6,14 +6,11 @@
 /*   By: mmohamma <mmohamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 16:22:00 by mmohamma          #+#    #+#             */
-/*   Updated: 2022/06/20 11:25:53 by mmohamma         ###   ########.fr       */
+/*   Updated: 2022/06/22 15:25:23 by mmohamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-
-
 
 static int	exit_game(t_data *data)
 {
@@ -30,9 +27,9 @@ static void	struct_init(t_data *data)
 	data->p1.x = 0;
 	data->p1.y = 0;
 	data->p1.side = RIGHT;
+	data->nm.x = 0;
+	data->nm.y = 0;
 }
-
-
 
 int	main(int argc, char **argv)
 {
@@ -46,11 +43,10 @@ int	main(int argc, char **argv)
 				(data.map.row + 2) * PX, "so_long");
 		load_image(&data);
 		print_map(&data);
-		display_status(&data);
 
 		mlx_hook(data.mlx_win, 17, 0, exit_game, &data);
-		mlx_key_hook(data.mlx_win, key_hook, &data);
-		// mlx_loop_hook(data.mlx, ft_update, &data);
+		mlx_key_hook(data.mlx_win, ft_key_hook, &data);
+		mlx_loop_hook(data.mlx, ft_update, &data);
 
 		mlx_loop(data.mlx);
 	}

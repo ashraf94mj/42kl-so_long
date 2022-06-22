@@ -6,7 +6,7 @@
 /*   By: mmohamma <mmohamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:44:27 by mmohamma          #+#    #+#             */
-/*   Updated: 2022/06/20 11:25:50 by mmohamma         ###   ########.fr       */
+/*   Updated: 2022/06/22 15:22:02 by mmohamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,23 @@ void	ft_put_player(t_data *data, int x, int y)
 	data->p1.y = y;
 }
 
+int	is_enemy(char *c)
+{
+	static int	i;
+	const char	*s = "LKJI";
+
+	*c = ft_toupper(*c);
+	if (*c == 'N')
+	{
+		*c = s[i++];
+		if (i > 3)
+			i = 0;
+	}
+	if (*c == 'I' || *c == 'J' || *c == 'K' || *c == 'L')
+		return (1);
+	return (0);
+}
+
 void	print_map(t_data *data)
 {
 	int	x;
@@ -66,20 +83,16 @@ void	print_map(t_data *data)
 			if (data->map.pos[y][x] == 'E')
 				ft_put_image(data, data->exit, x, y);
 			if (data->map.pos[y][x] == 'P')
-			{
-				ft_put_image(data, data->space, x, y);	
 				ft_put_player(data, x, y);
-			}
 			if (data->map.pos[y][x] == 'C')
 				ft_put_image(data, data->collect, x, y);
-			if (data->map.pos[y][x] == 'N')
+			if (is_enemy(&data->map.pos[y][x]))
 				ft_put_image(data, data->enemy, x, y);
 		}
 		x = -1;
 	}
+	// printf("\n");  //
 }
-
-
 
 void	quit_game(t_data *data)
 {
@@ -90,18 +103,15 @@ void	quit_game(t_data *data)
 	mlx_destroy_image(data->mlx, data->exit);
 	mlx_destroy_image(data->mlx, data->wall);
 	mlx_destroy_image(data->mlx, data->space);
-
-
 	free_map(&data->map);
-
 	mlx_destroy_window(data->mlx, data->mlx_win);
-
 	mlx_loop_end(data->mlx);
-
+	
 	// exit(0);
+
 }
 
-void	check(t_data *data, int x, int y)
+void	check(t_data *data, int y, int x)
 {
 	if (data->map.pos[data->p1.y + y][data->p1.x + x] == '0')
 	{
@@ -116,25 +126,70 @@ void	check(t_data *data, int x, int y)
 		data->steps++;
 		data->map.c--;
 	}
+	else if (is_enemy(&data->map.pos[data->p1.y + y][data->p1.x + x]))
+		quit_game(data);
+
 	else if (data->map.pos[data->p1.y + y][data->p1.x + x] == 'E' && data->map.c == 0)
 		quit_game(data);
 }
 
-int	key_hook(int keycode, t_data *data)
+void	check_enemy(t_data *data, int y, int x)
+{
+	if (data->map.pos[data->nm.y + y][data->nm.x + x] == 'P')
+		quit_game(data);
+	else if (data->map.pos[data->nm.y + y][data->nm.x + x] == '0')
+	{
+		data->map.pos[data->nm.y + y][data->nm.x + x] = ft_tolower(data->map.pos[data->nm.y][data->nm.x]);
+		data->map.pos[data->nm.y][data->nm.x] = '0';
+	}
+	else
+		data->map.pos[data->nm.y][data->nm.x] = 'N';
+}
+
+void	enemy_move(t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	x = -1;
+	while (++y < data->map.row)
+	{
+		while (++x < data->map.col)
+		{
+			printf("%c", data->map.pos[y][x]);   // for checking ya
+			
+			data->nm.y = y;
+			data->nm.x = x;
+			if (data->map.pos[y][x] == 'I')
+				check_enemy(data, -1, 0);
+			else if (data->map.pos[y][x] == 'J')
+				check_enemy(data, 0, -1);
+			else if (data->map.pos[y][x] == 'K')
+				check_enemy(data, 1, 0);
+			else if (data->map.pos[y][x] == 'L')
+				check_enemy(data, 0, 1);
+		}
+		x = -1;
+	}
+	printf("\n");  //
+}
+
+int	ft_key_hook(int keycode, t_data *data)
 {
 	mlx_clear_window(data->mlx, data->mlx_win);
 	if (keycode == UP)
-		check(data, 0, -1);
+		check(data, -1, 0);
 	else if (keycode == LEFT)
 	{
-		check(data, -1, 0);
+		check(data, 0, -1);
 		data->p1.side = LEFT;
 	}
 	else if (keycode == DOWN)
-		check(data, 0, 1);
+		check(data, 1, 0);
 	else if (keycode == RIGHT)
 	{
-		check(data, 1, 0);
+		check(data, 0, 1);
 		data->p1.side = RIGHT;
 	}
 	print_map(data);
@@ -144,28 +199,31 @@ int	key_hook(int keycode, t_data *data)
 	return (0);
 }
 
+int	ft_update(t_data *data)
+{
+	static int	frame;
 
-// int	ft_update(t_data *data)
-// {
-// 	static int	frame;
-
-// 	// mlx_clear_window(data->mlx, data->mlx_win);
-
-// 	frame++;
-// 	if (frame == ANIMATION)
-// 	{
-// 		if (data->p1.side == RIGHT)
-// 			data->player = data->player2;
-// 		else
-// 			data->player = data->player2_2;
-// 	}
-// 	else if (frame >= ANIMATION * 2)
-// 	{
-// 		frame = 0;
-// 		if (data->p1.side == RIGHT)
-// 			data->player = data->player1;
-// 		else
-// 			data->player = data->player1_2;
-// 	}
-// 	print_map(data);
-// }
+	frame++;
+	if (frame == 10 || frame == 30)
+	{
+		if (data->p1.side == RIGHT)
+			data->player = data->player2;
+		else
+			data->player = data->player2_2;
+	}
+	else if (frame == 20 || frame == 40)
+	{
+		if (data->p1.side == RIGHT)
+			data->player = data->player1;
+		else
+			data->player = data->player1_2;
+	}
+	else if (frame > 50)
+	{
+		frame = 0;
+		enemy_move(data);
+	}
+	print_map(data);
+	display_status(data);
+	return (1);
+}
