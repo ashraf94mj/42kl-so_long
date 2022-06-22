@@ -26,22 +26,22 @@ RM		=	rm -f
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJS)
-			ar rcs $(NAME) $(OBJS)
-			ranlib $(NAME)
+			@ar rcs $(NAME) $(OBJS)
+			@ranlib $(NAME)
 
 %.o 	:	%.c
-			$(CC) $(CFLAGS) -c $< -o $@  
+			@$(CC) $(CFLAGS) -c $< -o $@  
 
 clean	:
-			$(RM) $(OBJS) $(OBJS_B)
+			@$(RM) $(OBJS) $(OBJS_B)
 
 fclean	:	clean
-			$(RM) $(NAME)
+			@$(RM) $(NAME)
 
 re		:	fclean all
 
 bonus	:	$(OBJS_B)
-			ar rcs $(NAME) $(OBJS_B)
-			ranlib $(NAME)
+			@ar rcs $(NAME) $(OBJS_B)
+			@ranlib $(NAME)
 
 .PHONY	:	all clean fclean re bonus

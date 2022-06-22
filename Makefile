@@ -28,11 +28,11 @@ lib		:
 
 clean	:	
 		@$(RM) $(NAME)	
-#make clean -C libft
+		@make clean -C libft
 
 fclean	:	clean
 		@$(RM) $(OBJ)
-#make fclean -C libft
+		@make fclean -C libft
 
 re		: fclean all
 

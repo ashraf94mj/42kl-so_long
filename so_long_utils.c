@@ -6,7 +6,7 @@
 /*   By: mmohamma <mmohamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 13:54:19 by mmohamma          #+#    #+#             */
-/*   Updated: 2022/06/22 16:41:36 by mmohamma         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:06:08 by mmohamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,5 @@ void	quit_game(t_data *data)
 	free_map(&data->map);
 	mlx_destroy_window(data->mlx, data->mlx_win);
 	mlx_loop_end(data->mlx);
-	// exit(0);
+	exit(0);
 }
