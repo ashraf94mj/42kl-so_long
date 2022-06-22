@@ -6,7 +6,7 @@
 /*   By: mmohamma <mmohamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:35:42 by mmohamma          #+#    #+#             */
-/*   Updated: 2022/06/21 10:48:41 by mmohamma         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:48:51 by mmohamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ static int	is_map_closed_pce(t_map *map)
 	i = 0;
 	j = 1;
 	str = map->pos;
-
 	while (i < map->col - 1)
 	{
 		if (str[0][i] != '1' || str[map->row - 1][i] != '1')
@@ -87,18 +86,6 @@ static int	is_map_closed_pce(t_map *map)
 	if (map->c < 1 || map->p != 1 || map->e < 1)
 		return (0);
 	return (1);
-}
-
-void	free_map(t_map *map)
-{
-	int		i;
-	char	**matrix;
-
-	matrix = map->pos;
-	i = 0;
-	while (i < map->row)
-		free(matrix[i++]);
-	free(matrix);
 }
 
 int	is_map_valid(char *file, t_map *map)

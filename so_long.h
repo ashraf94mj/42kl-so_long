@@ -6,15 +6,12 @@
 /*   By: mmohamma <mmohamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 14:27:13 by mmohamma          #+#    #+#             */
-/*   Updated: 2022/06/22 15:46:44 by mmohamma         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:49:46 by mmohamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-
-//remembber to remove
-#include <stdio.h>
 
 # include <mlx.h>
 # include <fcntl.h>
@@ -72,26 +69,26 @@ typedef struct s_data
 	t_enemy		nm;
 }				t_data;
 
-/*		so_long.c	*/
-
-
 /*		map_init.c	*/
 int		is_map_valid(char *file, t_map *map);
 void	free_map(t_map *map);
 
-/*		load.c		*/
+/*		so_long_utils.c		*/
+void	free_map(t_map *map);
 void	load_image(t_data *data);
-
-void	init_enemy(t_data *data);
-
-void	print_map(t_data *data);
-
-int		ft_key_hook(int keycode, t_data *data);
-
-int		ft_update(t_data *data);
-
-void	display_status(t_data *data);
+void	ft_put_image(t_data *data, void *c, int x, int y);
 void	quit_game(t_data *data);
 
+/*		display.c			*/
+void	display_status(t_data *data);
+void	print_map(t_data *data);
+
+/*		move.c				*/
+int		ft_key_hook(int keycode, t_data *data);
+int		ft_update(t_data *data);
+
+/*		enemy.c				*/
+int		is_enemy(char *c);
+void	enemy_move(t_data *data);
 
 #endif

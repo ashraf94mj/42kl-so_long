@@ -1,5 +1,6 @@
 NAME	=	so_long
-SRC		=	so_long.c	map_init.c	load.c 	move.c	\
+SRC		=	so_long.c		map_init.c		so_long_utils.c		\
+			display.c		move.c			enemy.c				\
 			getnextline/get_next_line.c
 OBJ		=	$(SRC:.c=.o)
 
