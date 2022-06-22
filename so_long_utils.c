@@ -6,7 +6,7 @@
 /*   By: mmohamma <mmohamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 13:54:19 by mmohamma          #+#    #+#             */
-/*   Updated: 2022/06/22 17:06:08 by mmohamma         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:52:43 by mmohamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_map(t_map *map)
 	free(matrix);
 }
 
-void	*ft_load_image(void *mlx, char *path)
+static void	*ft_load_image(void *mlx, char *path)
 {
 	int	temp;
 

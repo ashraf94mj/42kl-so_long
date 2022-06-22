@@ -6,7 +6,7 @@
 /*   By: mmohamma <mmohamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:28:24 by mmohamma          #+#    #+#             */
-/*   Updated: 2022/06/22 16:48:34 by mmohamma         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:53:31 by mmohamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_enemy(char *c)
 	return (0);
 }
 
-void	check_enemy(t_data *data, int y, int x)
+static void	check_enemy(t_data *data, int y, int x)
 {
 	if (data->map.pos[data->nm.y + y][data->nm.x + x] == 'P')
 		quit_game(data);

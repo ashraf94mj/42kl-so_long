@@ -6,13 +6,13 @@
 /*   By: mmohamma <mmohamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:44:27 by mmohamma          #+#    #+#             */
-/*   Updated: 2022/06/22 16:49:04 by mmohamma         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:53:07 by mmohamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	check(t_data *data, int y, int x)
+static void	check(t_data *data, int y, int x)
 {
 	if (data->map.pos[data->p1.y + y][data->p1.x + x] == '0')
 	{

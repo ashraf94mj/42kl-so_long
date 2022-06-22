@@ -6,7 +6,7 @@
 /*   By: mmohamma <mmohamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 16:43:21 by mmohamma          #+#    #+#             */
-/*   Updated: 2022/06/22 16:43:56 by mmohamma         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:52:58 by mmohamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	display_status(t_data *data)
 	free(str2);
 }
 
-void	ft_put_player(t_data *data, int x, int y)
+static void	ft_put_player(t_data *data, int x, int y)
 {
 	ft_put_image(data, data->player, x, y);
 	data->p1.x = x;
