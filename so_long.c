@@ -6,7 +6,7 @@
 /*   By: mmohamma <mmohamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 16:22:00 by mmohamma          #+#    #+#             */
-/*   Updated: 2022/06/22 16:49:22 by mmohamma         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:29:22 by mmohamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,15 @@ int	main(int argc, char **argv)
 		data.mlx_win = mlx_new_window(data.mlx, (data.map.col - 1) * PX,
 				(data.map.row + 2) * PX, "so_long");
 		load_image(&data);
-		print_map(&data);
 		mlx_hook(data.mlx_win, 17, 0, exit_game, &data);
 		mlx_key_hook(data.mlx_win, ft_key_hook, &data);
 		mlx_loop_hook(data.mlx, ft_update, &data);
 		mlx_loop(data.mlx);
 	}
 	else
+	{
 		ft_putendl_fd("Error", 1);
+		return (1);
+	}
 	return (0);
 }
