@@ -6,7 +6,7 @@
 /*   By: mmohamma <mmohamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 14:27:13 by mmohamma          #+#    #+#             */
-/*   Updated: 2022/06/22 17:08:45 by mmohamma         ###   ########.fr       */
+/*   Updated: 2022/06/23 11:39:58 by mmohamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdlib.h>
 # include "libft.h"
 # include "get_next_line.h"
+
+# include <stdio.h>
 
 # define UP 119
 # define LEFT 97

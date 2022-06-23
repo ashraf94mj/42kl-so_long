@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"mlx.h": "c",
+		"HOOK.C": "cpp",
+		"hook.c.C": "cpp",
+		"get_next_line.h": "c"
+	}
+}

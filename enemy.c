@@ -6,9 +6,11 @@
 /*   By: mmohamma <mmohamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:28:24 by mmohamma          #+#    #+#             */
-/*   Updated: 2022/06/22 17:53:31 by mmohamma         ###   ########.fr       */
+/*   Updated: 2022/06/23 01:17:58 by mmohamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include  <stdio.h>
 
 #include "so_long.h"
 

@@ -6,7 +6,7 @@
 /*   By: mmohamma <mmohamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:35:42 by mmohamma          #+#    #+#             */
-/*   Updated: 2022/06/22 18:43:48 by mmohamma         ###   ########.fr       */
+/*   Updated: 2022/06/23 12:14:12 by mmohamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	is_map_rectangle(t_map *map, char *file)
 	return (1);
 }
 
-static void	is_pce(char c, t_map *map)
+static int	is_pce(char c, t_map *map)
 {
 	if (c == 'P')
 		map->p++;
@@ -58,6 +58,10 @@ static void	is_pce(char c, t_map *map)
 		map->c++;
 	if (c == 'E')
 		map->e++;
+	if (c == '1' || c == '0' || c == 'P' || c == 'C'
+		|| c == 'E' || c == 'N')
+		return (0);
+	return (1);
 }
 
 static int	is_map_closed_pce(t_map *map)
@@ -77,7 +81,8 @@ static int	is_map_closed_pce(t_map *map)
 		{
 			if (str[j][0] != '1' || str[j][map->col - 2] != '1')
 				return (0);
-			is_pce(str[j][i], map);
+			if (is_pce(str[j][i], map))
+				return (0);
 			j++;
 		}
 		j = 1;

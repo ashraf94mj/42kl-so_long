@@ -6,7 +6,7 @@
 /*   By: mmohamma <mmohamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 16:43:21 by mmohamma          #+#    #+#             */
-/*   Updated: 2022/06/22 17:52:58 by mmohamma         ###   ########.fr       */
+/*   Updated: 2022/06/23 12:18:15 by mmohamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	print_map(t_data *data)
 	{
 		while (++x < data->map.col)
 		{
+			printf("%c", data->map.pos[y][x]);
 			if (data->map.pos[y][x] == '1')
 				ft_put_image(data, data->wall, x, y);
 			if (data->map.pos[y][x] == '0')
@@ -64,4 +65,5 @@ void	print_map(t_data *data)
 		}
 		x = -1;
 	}
+	printf("\n");
 }

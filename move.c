@@ -6,7 +6,7 @@
 /*   By: mmohamma <mmohamma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:44:27 by mmohamma          #+#    #+#             */
-/*   Updated: 2022/06/22 17:53:07 by mmohamma         ###   ########.fr       */
+/*   Updated: 2022/06/23 11:58:19 by mmohamma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,5 @@ int	ft_update(t_data *data)
 	}
 	print_map(data);
 	display_status(data);
-	return (1);
+	return (0);
 }
